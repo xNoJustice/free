@@ -1,0 +1,77 @@
+#----------------------------------------------------------------------------------
+#İlk Boş Pencere Oluşturma
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QRadioButton, QCheckBox, QComboBox
+import sys
+
+class YeniPencere(QWidget):
+    def __init__(self):
+        super().__init__()
+
+uygulama = QApplication(sys.argv)
+pencere = YeniPencere()
+pencere.show()
+uygulama.exec_()
+#----------------------------------------------------------------------------------
+print("Pencerenin y düzelemdeki yeri: {}".format(self.y())) #format ile yazma
+#----------------------------------------------------------------------------------
+self.resize(100,100) #Boyut ayarlama
+self.move(100,100) #Yerini ayarlama
+self.setWindowTitle("Title") #Basligi ayarlama
+self.setText("Yazi") #İçindeki yaziyi ayarlama
+#----------------------------------------------------------------------------------
+self.etiket = QLabel("Programa Hoşgeldiniz!", self) #Etiket olusturup ad verip onu self arayüzünün üstünde yazi olarak gösterme
+#----------------------------------------------------------------------------------
+self.lineedit = QLineEdit(self) #Bir boş input veri alma alanı olusturma
+self.lineedit.setEchoMode(QLineEdit.Password) #Girilen bilgiyi sifre gibi girmeyi sagliyor
+self.lineedit.setReadOnly("True") #True yapildiginda yaziyi silinmesini engelliyor 
+#----------------------------------------------------------------------------------
+self.buton = QPushButton("Tıkla!", self) #Bos bir buton olusturma
+#----------------------------------------------------------------------------------
+layout = QVBoxLayout(self) #Bu layout'a eklenenler alt alta gösterilecek
+layout2 = QHBoxLayout(self) #Bu layout'a eklenenler yan yana gösterilecek
+
+layout.addWidget(self.lineedit) #lineedit'i layout'a ekledik
+layout.addWidget(self.buton) #buton'u layout'a ekleme
+layout.addWidget(self.etiket) #etiketi layout'a ekleme
+#----------------------------------------------------------------------------------
+self.lineedit.ReturnPressed.connect(self.fonksiyonadi) #lineedit'te enter'a basılınca fonksiyonu calistirir
+self.lineedit.textChanged.connect(self.fonksiyonadi) #yaziyi yazarken fonksiyonu calistirir
+self.buton.clicked.connect(self.fonksiyonadi) #buton tıklandiginda fonksiyonu calistirir
+#----------------------------------------------------------------------------------
+self.radyobutton = QRadioButton("Buton1", self) #Secmeli bir buton ekler
+#----------------------------------------------------------------------------------
+self.checkbox = QCheckBox("Buton1", self) #Secmeli bir buton ekler
+#----------------------------------------------------------------------------------
+self.combobox = QComboBox("Buton1", self) #Combo box ekler
+#----------------------------------------------------------------------------------
+self.combobox.addItem("") #Combobox'a item ekler
+self.combobox.addItems("","") #Combobox'a itemler ekler
+#----------------------------------------------------------------------------------
+self.liste = QListWidget(self) #Liste oluşturur
+self.list.addItem("item") #Listeye item ekler
+self.list.addItems("items") #Listeye itemler ekler
+self.list.currentRow() #Listenin seçili elemanin rowunu verir
+self.list.currentItem() #Listenin seçili elemanin adini verir
+#----------------------------------------------------------------------------------
+import mysql.connector # Mysql Baglantı modolünü ekler
+#----------------------------------------------------------------------------------
+#mysql baglanti yapma
+mydb = mysql.connector.connect(
+
+    host = "localhost",
+    user = "root",
+    passwd = "",
+    database = "okul"
+    )
+#----------------------------------------------------------------------------------
+mycursor = mydb.cursor() #Sorgu yaratma
+
+mycursor.execute(" SQL Sorgu ") #Sql sorgusunun yazildigi kisim
+
+myresult = mycursor.fetchall() #Sorgudan çıkanların hepsini alma
+#----------------------------------------------------------------------------------
+mycursor2 = mydb.cursor() #İkinci sql sorgusu olusturma 
+sql = "UPDATE ogrenci SET adi = %s, soyadi = %s WHERE ono = %s" #Sql sorgusu
+val = (ad, soyad, no) # Degerler
+mycursor2.execute(sql, val) #Degerler ile sql'i birbirine baglama
+mydb.commit() #Kayitlari database aktarma

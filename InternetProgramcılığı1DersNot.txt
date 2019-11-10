@@ -1,0 +1,185 @@
+﻿----------------------------------------------------------------------------------
+<html>
+  <head>
+  </head>
+  <body>
+
+    <?php
+    
+    ?>
+
+  </body>
+</html>
+----------------------------------------------------------------------------------
+;                     # Coğu satırın sonuna konması gereken bir syntax zorunluluğu
+echo                  # Echo komutu ekrana bir sey yazdırır
+/* */                 # Komut blogunu devre disi birakir
+$x                    # Degisken tanımlama
+<br>                  # Satır atlama
+$x = array()          # array liste olusturma
+echo strlen()         # string uzunlugunu verir
+echo str_word_count() # string kelime sayisini verir
+echo strrev()         # string'i terse çevirir
+$x + $y               # toplama
+$x - $y               # cikarma
+$x * $y               # carpma
+$x / $y               # bolme
+$x ** $y              # us alma
+$x % $y               # mod alma
+!=                    # esit degil
+$x += $y              # +1 ekleme
+>=                    # büyük esit
+<=                    # kücük esit
+$x++                  # x'i 1 artirma
+$x && $y              # x and y
+$x || $y              # x or y 
+----------------------------------------------------------------------------------
+#if yapisi
+
+if ($x = 5){
+  echo "True";
+} 
+-----------------------------------
+#elif yapisi
+
+if ($x = 5){
+  echo "Sayi 5";
+}elseif($x = 10){
+  echo "Sayi 10";
+}else{
+  echo "Sayi $x";
+}
+-----------------------------------
+#switch yapisi
+<?php
+$x = 70;
+switch($x){
+    case "5" :
+    echo "Sayi = 5";
+    break;
+    case "10" : 
+    echo "Sayi = 10";
+    break;
+    default:
+    echo "Sayi 5 veya 10 degil. Sayi $x";
+}
+?>
+-----------------------------------
+#while yapisi
+
+while($x <= 100){
+  echo $x;
+  $x++;
+}
+-----------------------------------
+#do while yapisi
+
+do {
+  echo $x;
+  $x++;
+}while($x <= 100);
+-----------------------------------
+#for yapisi
+# for ($x = 0; $x <= 100; $x++)
+
+for (min;max;artis){
+-----------------------------------
+#foreach yapisi
+
+foreach($array as $value){
+}
+-----------------------------------
+#function yapisi
+
+function function_name(){
+}
+-----------------------------------
+#Vize final notunu hesaplatıp geçip kaldığını söyleyen fonksiyon yaz. Sonuç Geçti/Kaldı
+            function hesaplama($vize,$final){
+                $ort = $vize * 0.4 + $final * 0.6;
+                if ($ort < 50){
+                    echo $ort . " " . " ile kaldiniz";
+                
+                }else{
+                    echo $ort . " " . " ile gectiniz";
+                }
+            }
+            hesaplama(50,40);
+-----------------------------------
+#Verilen ilk sayinin ikinci sayiya tam bölünüp bölünmediğini bulan fonksiyonu yaz
+#ilk sayi 10 ikinci sayi 5 sonuç 10 sayisi 5 sayisina tam bölünebilir. 
+#Birinci sayi 21 ikinci sayi 8 sonuç 21 sayisi 8 sayisina tam bölünemez.         
+            function bolme ($sayi1, $sayi2){
+                if ($sayi1 % $sayi2 == 0){
+                    echo $sayi1 . " " . "sayisi" . " " . $sayi2 . " " . "sayisina tam bölünebilir";
+                } else {
+                    
+                    echo $sayi1 . " " . "sayisi" . " " . $sayi2 . " " . "sayisina tam bölünemez";
+                }
+            }
+            bolme (59,3);
+-----------------------------------
+#0 ile istenilen bir sayi arasinda (0'dan büyük olma kosuluyla) arasindaki sayilarin istenilen bir
+#sayiya tam bölünen sayilarin kaç tane olduğunu bulan fonksiyonu yaz. ($s1, $b1) len list 
+            function bolunme ($sayi1,$sayi2){
+                $sayac = 0;
+                if ($sayi1>0){
+                    for ($x = 0; $x <= $sayi1; $x++){
+                        if ($x % $sayi2 == 0){
+                            $sayac += 1;
+                        }
+                    }
+                }else{
+                    echo "Sıfırdan buyuk sayi giriniz";
+                }
+                echo $sayac;
+            }
+            bolunme(10,2);
+-----------------------------------
+#Çarpım tablosunu yazdıran fonksiyon yap.
+            function carpim(){
+                for ($i = 1; $i <= 10; $i++){
+                    for ($j = 1; $j <= 10; $j++){
+                        echo "$i x $j =" . $i*$j . "<br>";
+                    }
+                echo "<br>";
+                }
+            }
+            carpim();
+-----------------------------------
+#Verilen bir sayinin  faktoriyelini alan fonksiyonu yaz. $sayi faktoriyeli .. dır.
+            function faktoriyel($sayi1){
+                
+                $a = 1;
+                for ($x = 1; $x <= $sayi1; $x++){
+                    $a = $a * $x;
+                }
+            
+                echo $a;
+            }
+            faktoriyel(5);
+-----------------------------------
+#Fiyati verilen bir urunun kac adet oldugu bilgisi girilerek %18 kdv li toplam fiyatini
+#hesaplatarak ekrana hesaplanan tutarı yazdırıp 250 tl ve üstü olanlara kargo bedava yazdıran
+#fonksiyonu yazdir.
+            function hesaplama($fiyat,$adet){
+                $toplam = ($fiyat + $fiyat*0.18) * $adet;
+                if ($toplam > 250){
+                    
+                    echo "Toplam urun fiyati " . " " . $toplam . " TL " . "<br>";
+                    echo "Bu urun icin kargonuz ücretsiz";
+                }else{
+                    echo $toplam;
+                }
+            
+            }
+            hesaplama(100,10);
+-----------------------------------
+#Girilen metni h1den h6'ya kadar yazdiran fonksiyon yaz.   
+            function yazdir($metin){
+                for ($x = 1; $x <= 6; $x++){
+                    echo "<h" . "$x >" . $metin . "<h" . "$x >";
+                }
+            }
+            yazdir("Selam");
+-----------------------------------

@@ -1,0 +1,36 @@
+//////////////////////////// PyQt5 Database 
+from PyQt5.QtWidgets import *
+import sys
+import mysql.connector
+
+mydb = mysql.connector.connect(
+
+    host = "localhost",
+    user = "root",
+    passwd = "",
+    database = "okul"
+    )
+
+mycursor = mydb.cursor()
+
+mycursor.execute("SELECT * FROM ogrenci")
+
+myresult = mycursor.fetchall()
+
+isimler = []
+for siradaki in myresult:
+    isimler.append(siradaki[1] + " " + siradaki[2])
+
+class Pencere(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.resize(200,400)
+        self.liste = QListWidget(self)
+        self.liste.addItems(isimler)
+        self.liste.resize(200,400)
+
+        
+uygulama = QApplication(sys.argv)
+pencere = Pencere()
+pencere.show()
+uygulama.exec_()

@@ -1,0 +1,77 @@
+from PyQt5.QtWidgets import QWidget, QApplication, QListWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton
+import sys
+import mysql.connector
+
+mydb = mysql.connector.connect(
+
+    host = "localhost",
+    user = "root",
+    passwd = "",
+    database = "okul"
+    )
+
+mycursor = mydb.cursor()
+
+mycursor.execute("SELECT * FROM ogrenci")
+
+myresult = mycursor.fetchall()
+
+no = []
+ad = []
+soy = []
+
+for x in myresult:
+    no.append(str(x[0]))
+    ad.append(x[1])
+    soy.append(x[2])
+
+class Pencere(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QHBoxLayout(self)
+        self.list = QListWidget(self)
+        self.list.addItems(ad)
+        self.list2 = QListWidget(self)
+        self.list2.addItems(soy)
+        self.list3 = QListWidget()
+        self.list3.addItems(no)
+        self.lineEdit = QLineEdit(self)
+        self.lineEdit2 = QLineEdit(self)
+        self.button = QPushButton("Güncelle", self)
+        
+        layout.addWidget(self.list)
+        layout.addWidget(self.list2)
+        layout.addWidget(self.lineEdit)
+        layout.addWidget(self.lineEdit2)
+        layout.addWidget(self.button)
+        
+        self.list.clicked.connect(self.aktarad)
+        self.list2.clicked.connect(self.aktarsoyad)
+        self.button.clicked.connect(self.aktarma)
+
+    def aktarad (self):
+        global row
+        row = self.list.currentRow()
+        item = self.list.currentItem()
+        self.lineEdit.setText(item.text())
+
+    def aktarsoyad (self):
+        item = self.list2.currentItem()
+        self.lineEdit2.setText(item.text())
+
+    def aktarma (self):
+        global row
+        ad = str(self.lineEdit.text())
+        soyad = str(self.lineEdit2.text())
+        no = 1
+        no += row
+        mycursor2 = mydb.cursor()
+        sql = "UPDATE ogrenci SET adi = %s, soyadi = %s WHERE ono = %s"
+        val = (ad, soyad, no)
+        mycursor2.execute(sql, val)
+        mydb.commit()
+
+uygulama = QApplication(sys.argv)
+pencere = Pencere()
+pencere.show()
+uygulama.exec_()
