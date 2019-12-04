@@ -183,3 +183,131 @@ function function_name(){
             }
             yazdir("Selam");
 -----------------------------------
+<?php
+// Değişken Tanımlama
+$b = 5;
+$c = "Harun";
+-----------------------------------
+// Echo Kullanımı
+echo "Test";
+echo "</br>";
+echo "Test2";
+echo "</br>";
+echo "<i>Bu Yazı İtaliktir</i>";
+echo "</br>";
+echo "<i>". 'Bu Yazı İtaliktir' . "</i>";
+echo "</br>";
+-----------------------------------
+// Tek Tırnak, Çift Tırnak Farkı
+$a = "Hüseyin";
+$d = "$a Taş"; 
+$e = '$a Taş';
+echo $a.' Taş';
+echo "</br>";
+echo $e;
+echo "</br>";
+echo $d;
+-----------------------------------
+// Sabit Tanımlama
+define ('pi', 3.14);
+$r = 10;
+echo "</br>";
+echo 2*pi*$r;
+echo "</br>";
+-----------------------------------
+// Ve, Veya Kullanımı
+$test = 10;
+$test2 = 20;
+if($test != $test2 && $test < $test2){
+    echo "Ve";
+}
+echo "</br>";
+if($test > $test2 || $test < $test2){
+    echo "Veya";
+}
+echo "</br>";
+-----------------------------------
+// Array Birleştirme
+$test3 = ['Manisa', 'İstanbul', 'Denizli'];
+$test4 = ['Ankara', 'İzmir', 'Balıkesir'];
+$test5 = array_merge([$test3, $test4]);
+// Array Yazdırma
+print_r($test5);
+echo "</br>";
+// Arrayde Kelime Arama
+if(in_array("Manisa", $test3)){
+    echo "True";
+}
+echo "</br>";
+-----------------------------------
+// Array Yazdırma 2
+$test6 = ['Limon', 'Portakal', 'Muz', 'Elma'];
+foreach($test6 as $index => $val)
+    echo $index+1 . '. Değer = ' . $val . ' --- ' . "Dizi[" . ($index+1). "] = ". $val . "</br>";
+sort($test6);
+echo "</br>";
+foreach($test6 as $index => $val)
+    echo $index+1 . '. Değer = ' . $val . ' --- ' . "Dizi[" . ($index+1). "] = ". $val . "</br>";
+rsort($test6);
+echo "</br>";
+foreach($test6 as $index => $val)
+    echo $index+1 . '. Değer = ' . $val . ' --- ' . "Dizi[" . ($index+1). "] = ". $val . "</br>";
+echo "</br>";
+-----------------------------------
+// Dosya Kontrol
+if(file_exists('test.php'))
+    echo "Dosya Bulunmaktadır.";
+echo "</br>";
+-----------------------------------
+// Function
+function ort ($ort){
+    if($ort >= 90){
+        echo "Harf Notu = AA";
+    }else if($ort >= 85){
+        echo "Harf Notu = BA";
+    }else if($ort >= 75){
+        echo "Harf Notu = BB";
+    }else if($ort >= 65){
+        echo "Harf Notu = CB";
+    }else if($ort >= 60){
+        echo "Harf Notu = CC";
+    }else if($ort >= 50){
+        echo "Harf Notu = DC";
+    }else if($ort >= 45){
+        echo "Harf Notu = DD";
+    }else if($ort >= 25){
+        echo "Harf Notu = FD";
+    }else{
+        echo "Harf Notu = FF";
+    }
+}
+ort(46);
+echo "</br>";
+-----------------------------------
+// Function 2 
+function Kıyasla($a, $b)
+{
+    if ($a > $b){
+        echo "1. Sayı 2. Sayıdan Büyüktür";
+    }else if ($b > $a){
+        echo "2. Sayı 1. Sayıdan Büyüktür";
+    }else{
+        echo "Sayılar Birbirine Eşittir";
+    }
+}
+Kıyasla(44,44);
+-----------------------------------
+$date = getdate();
+echo "</br>";
+echo 'Kaçıncı Saniye : ' . $date['seconds'] . '</br>';
+echo 'Kaçıncı Dakika : ' . $date['minutes'] . '</br>';
+echo 'Kaçıncı Saat : ' . $date['hours'] . '</br>';
+echo 'Haftanın Kaçıncı Günü : ' . $date['wday'] . '</br>';
+echo 'Ayın Kaçıncı Günü : ' . $date['mday'] . '</br>';
+echo 'Kaçıncı Ay : ' . $date['month'] . '</br>';
+echo 'Yılın Kaçıncı Günü : ' . $date['yday'] . '</br>';
+echo 'Kaçıncı Yıl : ' . $date['year'] . '</br>';
+echo "</br>";
+echo "TARİH 30 EYLÜL 2019 <br>";
+echo "SAAT 14:49:50";
+?>
