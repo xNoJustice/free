@@ -1,0 +1,185 @@
+/home => Kullanıcılar dizini
+/ => Ana dizin
+ls => Dosya klasör listeleme
+ls -a => Tüm dosyaları listeler
+ls -l => Dosyaları ayrıntılı listeleme
+ls -al => Tüm dosyaları ayrıntılı listeler
+ln -s dosyaKonumu linkinAdı
+-- murat@hp:~Masaüstü$ ln -s /boot/grub/grub.cfg acilis
+cd (change directory)
+-- Dizin(klasör) değiştirmek için cd komutu kullanılır.
+pwd (print working directory)
+-- İçinde bulunduğunuz dizinin adresini görüntülemek için kullanılır
+touch => Dosya oluşturma
+mkdir => Klasör oluşturma
+rm => Dosya silme
+rmdir => Klasör silme
+rm komutunun aldığı bazı parametreler :
+-i : Dosyanın silinmesi için kullanıcıdan onay ister.
+-f : Kullanıcıdan hiçbir zaman onay istemez.
+-r : Komut rekürsif çalışıp alt dizin ve dosyaların da
+silinmesi sağlanır.
+-- rm -rf murat komutu ile murat klasörü içerisindeki tüm
+dosya ve alt klasörlerle beraber silinecektir.
+cp => Dosya ve dizin kopyalama
+-- cp kaynakdosya hedef
+mv => Dosya taşımak / Yeniden adlandırma
+mv pf.conf /etc komutu ile pf.conf dosyası /etc dizininin altına taşınacaktır
+cat => Dosya içeriğini ekrana yazdırma
+-- -n parametresi ile kullanıldığında satırları numaralandırır.
+more => Dosyanın içeriğini sayfa sayfa gösterir.
+less => Aşağı ve yukarı ok tuşlarıyla sayfada ilerlenebilir.
+tac => Dosyanın içeriğini sondan başa doğru gösterir.
+- tac dosyaAdı
+rev => Dosyanın içeriğini her satırı ters çevirerek gösterir.
+- rev dosyaAdı
+head -5 linux => linux isimli dosyanın ilk 5 satırı ekranda görüntülenir.
+tail -5 linux => linux isimli dosyanın son 5 satırı ekranda görüntülenir.
+
+// Dosya Dizin İzleri
+- Dosya sahibinin izinleri (Dosyanın sahibi : u)
+- Dosya grubunun izinleri (Kullanıcı grubu : g)
+- Diğer kullanıcıların izinleri (Diğer kullanıcılar : o)
+
+- Okuma (r)
+-- Dosya içeriğini görebilir mi ?
+-- (Klasörler için) dosya listesini alabilir mi ?
+- Yazma (w)
+-- Dosyaya yazma izni, aynı zamanda dosyayı silme izni ?
+-- (Klasörler için) Bu klasör içinde dosya veya alt klasör oluşturulabilir mi ?
+- Çalıştırma (x)
+-- Dosyayı çalıştırabilir mi?
+-- (Klasörler için) Bu klasöre geçebilir mi?
+
+-rwxrw-r--
+Dosya tipinin belirtildiği kısım
+"-" Normal dosya
+"d" Dizin (Klasör)
+"c" Karakter bazında işlem yapan aygıt sürücüleri
+"b" Blok bazında işlem yapan aygıt sürücüleri
+"l" Başka bir dosyayı gösteren link dosyaları
+
+-rwx
+ilk 3 admin, ortadaki 3 gruplar, son 3 diğer kullanıcılar
+
+// Dosya Dizin Değiştirme
+İzin eklemek için +, İzin kaldırmak için –
+Okuma: r , Yazma: w , Çalıştırma: x
+Sahibi: u , Grubu: g , Diğerleri: o , Herkes: a
+chmod u+rwx, g-w, o-rwx filename
+
+400 Dosya sahibi için okuma
+200 Dosya sahibi için yazma
+100 Dosya sahibi için çalıştırma
+040 Gruptakiler için okuma
+020 Gruptakiler için yazma
+010 Gruptakiler için çalıştırma
+004 Diğerleri için okuma
+002 Diğerleri için yazma
+001 Diğerleri için çalıştırma
+r (okuma) : 4
+w (yazma) : 2
+x (çalıştırma) : 1
+
+sudo chgrp yeniGrup dosya/dizin
+sudo adduser kullanıcıAdı
+sudo deluser kullanıcıAdı
+sudo addgroup grubunAdı
+sudo delgroup grubunAdı
+
+// Metin Editörleri
+pico 
+nano
+vi
+vim
+
+ls -a > deneme (ls -a komutunun çıktısı deneme isimli
+dosyaya yönlendirilir. Eğer dosya yoksa yaratılır, varsa da
+üzerine yazılır.)
+
+ls -a >> deneme (ls -a komutunun çıktısı deneme
+isimli dosyaya eklenir, üzerine yazılmaz. Eğer dosya yoksa
+yaratılır.)
+
+sort komutu ile bir dosyanın ya da farklı bir komuttan
+gelen bir girdinin içeriği sıralanabilir.
+-r  sıralama tersine çevrilir.
+-u  yinelenen satırları atarak biricikliği sağlar.
+
+wc komutu
+Bir dosyadaki veya komut çıktısındaki satır, karakter ve
+kelime sayılarını bulmak için kullanılır. Alabileceği bazı
+parametreler :
+-l satır sayısını bulur. (line)
+-w kelime sayısını bulur. (word)
+-c karakter sayısını bulur. (character)
+
+Linux komut satırının en önemli özelliklerinden biri
+pipe’dır. Pipe (|) simgesi ile bir komutun çıktısını diğer bir
+komuta girdi olarak gönderebilirsiniz. Örneğin, 
+cat kod | wc -l
+
+cal Şu anki ay için bir takvim
+cal ay yıl  Belirtilen yılın ilgili ayının takvimi
+cal yıl  Belirtilen yılın bütün aylarını listeler
+
+grep murat deneme
+Bu komut deneme isimli dosyanın içinde murat kelimesi geçen
+tüm satırları listeler
+-v: Komutun davranışını tersine çevirir. Yani, aranılan
+kelimeyi içermeyen satırlar listelenir.
+-i: Arama sırasında büyük/küçük harf eşleştirmesi yapmaz.
+-r: Verilen dizinin alt dizinlerinde de arama yapar.
+-n: Aranan kelimenin geçtiği satır numarasını da gösterir.
+-c: Belirtilen dizinde aradığınız kelimenin kaç defa geçtiğini
+gösterir.
+-l: Şablona uygun satırların bulunduğu dosya adlarını listeler.
+(Sadece dosya isimleri listelenir, satırlar listelenmez.)
+
+find /home/murat -name bilgisayar
+-user murat (Sahibinin adı murat olan dosya/dizinler)
+-group myo (Sahibi myo grubuna dahil olan
+dosya/dizinler)
+-perm 755 (Erişim izni 755 olan dosya/dizinler)
+-type f (Dosyalar)
+-type d (Dizinler)
+-size +100k (100 Kbyte’dan büyük olan dosyalar)
+
+ps komutu
+Sistem yöneticisinin sıklıkla kullandığı en önemli
+komutlardan bir tanesidir. Çalışmakta olan processleri
+(süreç) listeler.
+-aux parametresi ile çok sık kullanılır.
+ps -aux | grep murat
+(Üstteki komut sonrasında sadece murat kullanıcısına ait
+süreçler ekranda listelenir.)
+
+kill komutu
+Çalışmakta olan bir processi sonlandırmak için
+kullanılır.
+kill (-sinyal) PID kullanımı mevcuttur.
+kill -9 1125 (1125 nolu processi sonlandırır.)
+
+Zip ile sıkıştırma
+  zip -r deneme.zip dosyaAdı/dizinAdı
+Zip dosyasını açmak
+  unzip deneme.zip
+
+tar ile gz olarak sıkıştırma
+  tar cvzf deneme.tar.gz dosya/dizin
+tar.gz dosyasını açmak
+  tar xvzf deneme.tar.gz
+  
+rar ile sıkıştırma (*)
+  rar a -ap deneme.rar dosya/dizin
+rar dosyasını açmak (*)
+  unrar e deneme.rar
+  unrar x deneme.rar
+
+Paket Kurulumu
+sudo apt-get install paketinAdı
+• Kurulu Olan Bir Paketi Kaldırmak
+sudo apt-get remove paketinAdı
+sudo apt-get purge paketinAdı
+• Paket Arşivini Güncellemek
+sudo apt-get update
